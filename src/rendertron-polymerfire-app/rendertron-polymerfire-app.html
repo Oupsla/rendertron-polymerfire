@@ -1,0 +1,72 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+
+<dom-module id="rendertron-polymerfire-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <firebase-app
+      auth-domain="rendertron-polymer.firebaseapp.com"
+      database-url="https://rendertron-polymer.firebaseio.com"
+      api-key="AIzaSyCfrOoGOSlOZKuhP09K8e-D6QhLifBhfyw"
+      storage-bucket="rendertron-polymer.appspot.com"
+      messaging-sender-id="667424373665">
+    </firebase-app>
+
+    <firebase-query
+      log
+      id="query"
+      path="/products"
+      data="{{data}}">
+    </firebase-query>
+
+    <h2>Hello [[prop1]]!</h2>
+    <hr/>
+
+    <template is="dom-repeat" items="{{data}}" as="product">
+      <div>
+        <h2> Product : [[product.name]] </h2>
+        <p> [[product.description]] </p>
+      </div>
+      <hr/>
+    </template>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class RendertronPolymerfireApp extends Polymer.Element {
+      static get is() { return 'rendertron-polymerfire-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'rendertron-polymerfire-app'
+          },
+
+          data: {
+            type: Array,
+            observer: 'dataChanged'
+          }
+        };
+      }
+
+      dataChanged(newData, oldData) {
+        console.log('dataChanged');
+        console.log(newData);
+        console.log(oldData);
+        // do something when the query returns values
+      }
+    }
+
+    window.customElements.define(RendertronPolymerfireApp.is, RendertronPolymerfireApp);
+  </script>
+</dom-module>

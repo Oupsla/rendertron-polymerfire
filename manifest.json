@@ -1,0 +1,6 @@
+{
+  "name": "rendertron-polymerfire",
+  "short_name": "rendertron-polymerfire",
+  "start_url": "/",
+  "display": "standalone"
+}
